@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Ember & Flame — Islamabad's most celebrated fine dining restaurant. Premium steaks, gourmet cuisine, private events. Est. 2018."/>
+<title>Ember &amp; Flame | Fine Dining · Islamabad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#06040a;
+  --ink2:#100c14;
+  --ink3:#1a1420;
+  --ember:#c8430a;
+  --ember-l:#e85d20;
+  --gold:#b8922a;
+  --gold-l:#d4ad4a;
+  --gold-pale:rgba(184,146,42,0.1);
+  --cream:#f4ede0;
+  --cream-d:#c8b898;
+  --muted:#7a6e60;
+  --border:rgba(184,146,42,0.16);
+  --glow:rgba(200,67,10,0.3);
+  --fd:"Cormorant",serif;
+  --fc:"Cinzel",serif;
+  --fb:"DM Sans",sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:var(--fb);overflow-x:hidden;font-size:16px}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--gold)}
+
+/* UTILS */
+.wrap{max-width:1180px;margin:0 auto;padding:0 5%}
+.eyebrow{font-family:var(--fc);font-size:0.58rem;letter-spacing:6px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem}
+.eyebrow::before,.eyebrow::after{content:"";flex:0 0 28px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.eyebrow.c{justify-content:center}
+.eyebrow.c::before{background:linear-gradient(90deg,transparent,var(--gold))}
+.rule{width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);margin:1.5rem 0 2.5rem}
+.rule.c{margin:1.5rem auto 2.5rem}
+.btn-fire{display:inline-flex;align-items:center;gap:0.7rem;padding:1.1rem 2.6rem;background:linear-gradient(135deg,var(--ember),#a83008);color:#fff;font-family:var(--fb);font-size:0.75rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all 0.35s;box-shadow:0 8px 32px rgba(200,67,10,0.35)}
+.btn-fire:hover{background:linear-gradient(135deg,var(--ember-l),var(--ember));box-shadow:0 14px 50px rgba(200,67,10,0.6);transform:translateY(-2px)}
+.btn-rim{display:inline-flex;align-items:center;gap:0.7rem;padding:1.1rem 2.6rem;background:transparent;color:var(--gold-l);font-family:var(--fb);font-size:0.75rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(184,146,42,0.4);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all 0.35s}
+.btn-rim:hover{background:var(--gold-pale);border-color:var(--gold-l);box-shadow:0 0 24px rgba(184,146,42,0.2)}
+
+/* ANIMATE */
+.rise{opacity:0;transform:translateY(32px);transition:opacity 1s ease,transform 1s ease}
+.rise.in{opacity:1;transform:none}
+.rise-l{opacity:0;transform:translateX(-32px);transition:opacity 1s ease,transform 1s ease}
+.rise-l.in{opacity:1;transform:none}
+.rise-r{opacity:0;transform:translateX(32px);transition:opacity 1s ease,transform 1s ease}
+.rise-r.in{opacity:1;transform:none}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:800;transition:all 0.5s;padding:0 5%}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between;height:90px;transition:height 0.4s}
+nav.scrolled{background:rgba(6,4,10,0.97);backdrop-filter:blur(30px);border-bottom:1px solid var(--border)}
+nav.scrolled .nav-wrap{height:66px}
+.brand{text-decoration:none;display:flex;flex-direction:column;line-height:1}
+.brand-name{font-family:var(--fc);font-size:1.45rem;font-weight:600;color:var(--gold-l);letter-spacing:2px}
+.brand-tag{font-family:var(--fb);font-size:0.5rem;letter-spacing:5px;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.nav-ul{display:flex;gap:2.5rem;list-style:none}
+.nav-ul a{font-family:var(--fb);font-size:0.72rem;font-weight:400;color:rgba(244,237,224,0.55);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.3s;position:relative}
+.nav-ul a::after{content:"";position:absolute;left:50%;right:50%;bottom:-4px;height:1px;background:var(--gold);transition:all 0.3s}
+.nav-ul a:hover{color:var(--gold-l)}
+.nav-ul a:hover::after{left:0;right:0}
+.nav-cta{font-family:var(--fc);font-size:0.75rem;font-weight:600;letter-spacing:2px;padding:0.65rem 1.6rem;background:linear-gradient(135deg,var(--gold),#9a7818);color:var(--ink);text-decoration:none;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:all 0.3s;box-shadow:0 4px 20px rgba(184,146,42,0.3)}
+.nav-cta:hover{box-shadow:0 8px 32px rgba(184,146,42,0.55);transform:translateY(-2px)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.burger span{display:block;width:22px;height:1.5px;background:var(--gold-l);transition:all 0.3s}
+.mob-nav{display:none;position:fixed;inset:0;background:rgba(6,4,10,0.99);z-index:900;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;backdrop-filter:blur(40px)}
+.mob-nav.open{display:flex}
+.mob-nav a{font-family:var(--fc);font-size:1.8rem;color:rgba(244,237,224,0.7);text-decoration:none;letter-spacing:3px;transition:color 0.25s}
+.mob-nav a:hover{color:var(--gold-l)}
+.mob-close{position:absolute;top:2rem;right:5%;background:none;border:1px solid var(--border);color:var(--gold);font-size:1.2rem;padding:0.4rem 0.9rem;cursor:pointer;font-family:var(--fb)}
+
+/* ═══ FLOATING BUTTON ═══ */
+.float-btn{position:fixed;bottom:2rem;right:2rem;z-index:700;display:flex;align-items:center;gap:0.9rem;text-decoration:none}
+.float-btn .fb-inner{width:60px;height:60px;background:linear-gradient(135deg,var(--ember),#8a2408);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 6px 30px rgba(200,67,10,0.5);animation:throb 3s ease-in-out infinite;transition:all 0.3s}
+@keyframes throb{0%,100%{box-shadow:0 6px 30px rgba(200,67,10,0.5)}50%{box-shadow:0 8px 50px rgba(200,67,10,0.8)}}
+.float-btn:hover .fb-inner{transform:scale(1.1)}
+.float-btn .fb-label{background:rgba(6,4,10,0.95);border:1px solid var(--border);padding:0.6rem 1.1rem;font-family:var(--fb);font-size:0.72rem;letter-spacing:1px;color:var(--cream-d);white-space:nowrap;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);opacity:0;transform:translateX(8px);transition:all 0.3s}
+.float-btn:hover .fb-label{opacity:1;transform:none}
+
+/* ═══ HERO ═══ */
+#hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(0.38) saturate(1.1)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(6,4,10,0.97) 0%,rgba(6,4,10,0.5) 40%,rgba(6,4,10,0.1) 70%,transparent 100%)}
+.hero-badge{position:absolute;top:0;right:5%;height:100%;display:flex;align-items:center;z-index:3;pointer-events:none}
+.badge-circle{width:150px;height:150px;border-radius:50%;border:1px solid rgba(184,146,42,0.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.3rem;backdrop-filter:blur(4px);background:rgba(6,4,10,0.3)}
+.badge-circle span:first-child{font-family:var(--fc);font-size:2rem;font-weight:700;color:var(--gold-l);line-height:1}
+.badge-circle span:last-child{font-family:var(--fb);font-size:0.5rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-align:center;padding:0 1rem}
+.hero-content{position:relative;z-index:3;padding:0 5% 8vh;width:100%;max-width:900px}
+.hero-label{font-family:var(--fc);font-size:0.58rem;letter-spacing:7px;text-transform:uppercase;color:var(--gold);opacity:0;animation:up 0.6s 0.4s both;display:flex;align-items:center;gap:0.7rem;margin-bottom:1.5rem}
+.hero-label::before{content:"";width:40px;height:1px;background:var(--ember)}
+.hero-h1{font-family:var(--fd);font-size:clamp(3.5rem,9vw,8rem);font-weight:600;line-height:0.9;letter-spacing:-1px;color:var(--cream);opacity:0;animation:up 0.9s 0.6s both;margin-bottom:1.2rem}
+.hero-h1 em{font-style:italic;font-weight:300;color:var(--gold-l)}
+.hero-h1 strong{font-weight:700;color:#fff;display:block;text-shadow:0 0 60px rgba(200,67,10,0.3)}
+.hero-sub{font-family:var(--fb);font-size:1.05rem;color:rgba(244,237,224,0.5);font-weight:300;margin-bottom:0.8rem;opacity:0;animation:up 0.7s 0.85s both;max-width:480px;line-height:1.6}
+.hero-urdu{font-family:var(--fd);font-size:1.15rem;color:rgba(184,146,42,0.7);font-style:italic;margin-bottom:2.8rem;opacity:0;animation:up 0.7s 1s both;direction:rtl;text-align:left}
+.hero-btns{display:flex;gap:1.2rem;flex-wrap:wrap;opacity:0;animation:up 0.7s 1.2s both}
+.hero-scroll{position:absolute;bottom:2.5rem;right:5%;z-index:3;display:flex;flex-direction:column;align-items:center;gap:0.5rem;opacity:0;animation:up 0.6s 1.5s both}
+.hero-scroll span{font-family:var(--fb);font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollDrop 1.8s ease-in-out infinite}
+@keyframes scrollDrop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}50.1%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* HERO STATS BAR */
+.hero-stats{position:relative;z-index:3;background:rgba(10,8,14,0.95);border-top:1px solid var(--border);border-bottom:1px solid var(--border);backdrop-filter:blur(20px)}
+.stats-row{display:flex;justify-content:center}
+.stat{padding:1.8rem 3.5rem;border-left:1px solid var(--border);flex:1;max-width:200px;text-align:center}
+.stat:first-child{border-left:none}
+.stat-num{font-family:var(--fd);font-size:2rem;font-weight:700;color:var(--gold-l);line-height:1;display:block}
+.stat-lbl{font-family:var(--fb);font-size:0.58rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-top:4px;display:block}
+
+/* ═══ FEATURED STRIP ═══ */
+.strip{background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.4rem 0;overflow:hidden}
+.strip-inner{display:flex;animation:ticker 24s linear infinite;white-space:nowrap}
+.si{font-family:var(--fc);font-size:0.62rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);padding:0 3rem;opacity:0.7}
+.si::after{content:"✦";padding-left:3rem;opacity:0.4}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══ MENU ═══ */
+#menu{padding:8rem 0;background:var(--ink2)}
+.sec-title{text-align:center;margin-bottom:5rem}
+.sec-title h2{font-family:var(--fd);font-size:clamp(2.8rem,6vw,5rem);font-weight:600;color:var(--cream);line-height:1}
+.sec-title h2 em{font-style:italic;font-weight:300;color:var(--gold-l)}
+.sec-title p{font-size:0.78rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:0.6rem;font-family:var(--fb)}
+.tabs{display:flex;justify-content:center;gap:0;border-bottom:1px solid var(--border);margin-bottom:4rem;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{height:0}
+.tab{font-family:var(--fc);font-size:0.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);padding:1rem 1.8rem;background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.3s;white-space:nowrap;display:flex;flex-direction:column;align-items:center;gap:0.4rem}
+.tab span.ticon{font-size:1.1rem;display:block}
+.tab.on,.tab:hover{color:var(--gold-l);border-bottom-color:var(--gold)}
+.panel{display:none}
+.panel.on{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;animation:panelIn 0.45s ease}
+@keyframes panelIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.dish{background:var(--ink3);border:1px solid var(--border);overflow:hidden;transition:all 0.45s;cursor:default;position:relative;group:true}
+.dish:hover{border-color:rgba(184,146,42,0.35);transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,0.6),0 0 0 1px rgba(184,146,42,0.08),inset 0 1px 0 rgba(184,146,42,0.1)}
+.dish-img{aspect-ratio:4/3;overflow:hidden;position:relative}
+.dish-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);filter:brightness(0.88) saturate(1.15)}
+.dish:hover .dish-img img{transform:scale(1.09)}
+.dish-veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,4,10,0.85) 0%,transparent 55%);display:flex;align-items:flex-end;padding:1rem;opacity:0;transition:opacity 0.4s}
+.dish:hover .dish-veil{opacity:1}
+.dish-badge-wrap{display:flex;gap:0.4rem;flex-wrap:wrap}
+.dbadge{font-family:var(--fc);font-size:0.53rem;letter-spacing:2px;text-transform:uppercase;padding:0.25rem 0.65rem;border:1px solid rgba(184,146,42,0.4);color:var(--gold-l);backdrop-filter:blur(4px);background:rgba(6,4,10,0.5)}
+.dish-body{padding:1.6rem}
+.dish-name{font-family:var(--fd);font-size:1.3rem;font-weight:600;color:var(--cream);margin-bottom:0.5rem;line-height:1.2}
+.dish-desc{font-size:0.82rem;color:var(--muted);line-height:1.65;margin-bottom:1.2rem}
+.dish-foot{display:flex;align-items:center;justify-content:space-between}
+.dish-price{font-family:var(--fd);font-size:1.4rem;font-weight:700;color:var(--gold-l)}
+.dish-price small{font-family:var(--fb);font-size:0.62rem;color:var(--muted);font-weight:300;margin-left:2px}
+.dish-dot{width:6px;height:6px;border-radius:50%;background:var(--ember)}
+.menu-foot{text-align:center;margin-top:4rem;padding:1.8rem 2rem;border:1px solid var(--border);font-family:var(--fd);font-size:1rem;font-style:italic;color:var(--muted)}
+.menu-foot span{color:var(--gold)}
+
+/* ═══ ABOUT ═══ */
+#about{padding:8rem 0;background:var(--ink)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center}
+.about-photos{position:relative;height:560px}
+.photo-main{position:absolute;top:0;left:0;width:78%;height:80%;border:1px solid var(--border);overflow:hidden}
+.photo-main img{width:100%;height:100%;object-fit:cover;filter:brightness(0.85) saturate(1.1)}
+.photo-sub{position:absolute;bottom:0;right:0;width:52%;height:50%;border:1px solid var(--border);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.photo-sub img{width:100%;height:100%;object-fit:cover;filter:brightness(0.85) saturate(1.05)}
+.photo-award{position:absolute;top:calc(80% - 40px);left:calc(78% - 40px);transform:translate(-50%,-50%);background:linear-gradient(135deg,var(--gold),#9a7818);width:80px;height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.1rem;z-index:2;box-shadow:0 8px 30px rgba(184,146,42,0.5)}
+.pa-num{font-family:var(--fd);font-size:1.5rem;font-weight:700;color:var(--ink);line-height:1}
+.pa-lbl{font-family:var(--fb);font-size:0.42rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);opacity:0.75;text-align:center}
+.about-text h2{font-family:var(--fd);font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:600;color:var(--cream);line-height:1.05;margin-bottom:0.5rem}
+.about-text h2 em{font-style:italic;font-weight:300;color:var(--gold-l)}
+.about-text p{font-size:0.95rem;color:var(--muted);line-height:1.9;margin-bottom:1.1rem}
+.about-text p strong{color:var(--cream-d);font-weight:400}
+.blockquote{border-left:2px solid var(--ember);padding:1.1rem 1.5rem;margin:2rem 0;background:rgba(200,67,10,0.04)}
+.blockquote p{font-family:var(--fd);font-size:1.1rem;font-style:italic;color:rgba(244,237,224,0.7);margin:0;line-height:1.6}
+.blockquote cite{font-family:var(--fb);font-size:0.68rem;color:var(--muted);letter-spacing:1px;margin-top:0.6rem;display:block}
+.tag-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.8rem}
+.tag{font-family:var(--fc);font-size:0.55rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);padding:0.35rem 0.9rem;border:1px solid var(--border);background:var(--gold-pale)}
+
+/* ═══ EXPERIENCE ═══ */
+#experience{padding:8rem 0;background:var(--ink2);position:relative;overflow:hidden}
+#experience::before{content:"";position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1800&q=60&auto=format&fit=crop") center/cover no-repeat;opacity:0.07;filter:grayscale(1)}
+.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:4rem;position:relative;z-index:1}
+.exp-card{background:var(--ink2);padding:3rem 2rem;text-align:center;transition:all 0.4s;position:relative;overflow:hidden;cursor:default}
+.exp-card::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(200,67,10,0.08),transparent 70%);opacity:0;transition:opacity 0.4s}
+.exp-card:hover{background:rgba(200,67,10,0.04)}
+.exp-card:hover::after{opacity:1}
+.exp-card:hover .ec-num{color:var(--ember)}
+.ec-img{width:100%;aspect-ratio:16/10;overflow:hidden;margin-bottom:1.8rem}
+.ec-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.7) grayscale(0.3);transition:all 0.5s}
+.exp-card:hover .ec-img img{filter:brightness(0.85) saturate(1.2) grayscale(0)}
+.ec-title{font-family:var(--fd);font-size:1.25rem;font-weight:600;color:var(--cream);margin-bottom:0.6rem}
+.ec-desc{font-size:0.8rem;color:var(--muted);line-height:1.65}
+.ec-rule{width:24px;height:1px;background:var(--gold);margin:1.2rem auto 0;transition:width 0.4s}
+.exp-card:hover .ec-rule{width:44px}
+
+/* ═══ GALLERY ═══ */
+#gallery{padding:0;background:var(--ink);overflow:hidden}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:250px 250px}
+.gal-cell{overflow:hidden;position:relative;cursor:pointer}
+.gal-cell.tall{grid-row:span 2}
+.gal-cell img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94),filter 0.5s}
+.gal-cell:hover img{transform:scale(1.08);filter:brightness(0.7) saturate(1.3)}
+.gal-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:1.2rem;opacity:0;transition:opacity 0.4s;background:linear-gradient(to top,rgba(6,4,10,0.75),transparent 50%)}
+.gal-cell:hover .gal-overlay{opacity:1}
+.gal-lbl{font-family:var(--fd);font-size:1rem;font-style:italic;color:var(--cream-d)}
+
+/* ═══ TESTIMONIALS ═══ */
+#testimonials{padding:8rem 0;background:var(--ink)}
+.testi-slider{overflow:hidden;margin-top:4rem}
+.testi-track{display:flex;gap:1.5rem;transition:transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94)}
+.tcard{min-width:calc(33.33% - 1rem);background:var(--ink2);border:1px solid var(--border);padding:2.4rem;flex-shrink:0;transition:all 0.35s;position:relative}
+.tcard::before{content:"\201C";position:absolute;top:-25px;right:1.5rem;font-family:var(--fd);font-size:11rem;color:rgba(184,146,42,0.04);line-height:1;pointer-events:none}
+.tcard:hover{border-color:rgba(184,146,42,0.3);box-shadow:0 12px 50px rgba(0,0,0,0.4)}
+.tcard-stars{color:var(--gold);font-size:0.88rem;letter-spacing:2.5px;margin-bottom:1.2rem}
+.tcard-txt{font-family:var(--fd);font-size:0.98rem;font-style:italic;color:rgba(244,237,224,0.6);line-height:1.8;margin-bottom:1.8rem;font-weight:300}
+.tcard-foot{display:flex;align-items:center;gap:0.9rem}
+.tcard-av{width:46px;height:46px;border-radius:50%;object-fit:cover;border:1px solid var(--border);filter:grayscale(0.3)}
+.tcard-name{font-family:var(--fd);font-size:1rem;font-weight:600;color:var(--cream-d)}
+.tcard-role{font-family:var(--fb);font-size:0.67rem;color:var(--muted)}
+.slider-btns{display:flex;justify-content:center;gap:1rem;margin-top:2.5rem}
+.slbtn{width:50px;height:50px;border:1px solid var(--border);background:var(--ink2);color:var(--gold);font-size:1rem;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.slbtn:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+
+/* ═══ RESERVATION ═══ */
+#reservation{padding:8rem 0;background:var(--ink2);position:relative;overflow:hidden}
+.res-bg{position:absolute;inset:0}
+.res-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.12) saturate(0.8)}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;position:relative;z-index:1}
+.res-left h2{font-family:var(--fd);font-size:clamp(2.2rem,4vw,3.4rem);font-weight:600;color:var(--cream);margin-bottom:0.5rem;line-height:1.05}
+.res-left h2 em{font-style:italic;color:var(--gold-l);font-weight:300}
+.res-left > p{color:var(--muted);font-size:0.93rem;line-height:1.85;margin-bottom:2.5rem}
+.clinks{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.clink{display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.4rem;background:rgba(6,4,10,0.7);border:1px solid var(--border);text-decoration:none;transition:all 0.3s;backdrop-filter:blur(10px)}
+.clink:hover{border-color:rgba(184,146,42,0.4);transform:translateX(6px)}
+.clink-icon{width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:var(--gold-pale);border:1px solid var(--border);flex-shrink:0}
+.clink-l{font-family:var(--fc);font-size:0.52rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.clink-v{font-size:0.9rem;color:var(--cream-d)}
+.mapbox{background:rgba(6,4,10,0.7);border:1px solid var(--border);padding:2rem;text-align:center;backdrop-filter:blur(10px)}
+.mapbox span{font-size:2.4rem;display:block;margin-bottom:0.8rem}
+.mapbox strong{font-family:var(--fd);font-size:1.1rem;color:var(--cream-d);display:block;margin-bottom:0.4rem;font-weight:600}
+.mapbox p{font-size:0.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem}
+.map-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.65rem 1.5rem;background:var(--gold);color:var(--ink);font-family:var(--fc);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);font-weight:700;transition:all 0.25s}
+.map-btn:hover{background:var(--gold-l)}
+.res-form{background:rgba(10,8,14,0.92);border:1px solid var(--border);backdrop-filter:blur(24px);padding:3rem;position:relative}
+.res-form::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--ember),var(--gold),transparent)}
+.rf-title{font-family:var(--fd);font-size:2rem;font-weight:600;color:var(--cream);margin-bottom:0.2rem}
+.rf-sub{font-size:0.78rem;color:var(--muted);margin-bottom:2rem}
+.fg{display:flex;flex-direction:column;gap:0.4rem;margin-bottom:1rem}
+.fg label{font-family:var(--fc);font-size:0.52rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.fg input,.fg select,.fg textarea{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--cream);font-family:var(--fb);font-size:0.88rem;padding:0.9rem 1.1rem;outline:none;transition:all 0.3s;width:100%;-webkit-appearance:none;border-radius:0;font-weight:300}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);background:rgba(184,146,42,0.04)}
+.fg select option{background:#10080c}
+.fg textarea{resize:vertical;min-height:90px}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg input[type=date],.fg input[type=time]{color-scheme:dark}
+.submit-btn{width:100%;padding:1.1rem;background:linear-gradient(135deg,var(--ember),#8a2408);color:#fff;font-family:var(--fc);font-size:0.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all 0.35s;margin-top:0.5rem}
+.submit-btn:hover{background:linear-gradient(135deg,var(--ember-l),var(--ember));box-shadow:0 8px 32px rgba(200,67,10,0.45)}
+.form-ok{display:none;padding:1rem;background:rgba(200,67,10,0.08);border:1px solid rgba(200,67,10,0.25);color:var(--ember-l);font-family:var(--fb);font-size:0.8rem;text-align:center;margin-top:0.5rem}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--ink);border-top:1px solid var(--border);padding:5rem 5% 2rem}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:4rem;border-bottom:1px solid var(--border)}
+.ft-brand-name{font-family:var(--fc);font-size:1.5rem;font-weight:700;color:var(--gold-l);letter-spacing:2px;display:block;margin-bottom:0.3rem}
+.ft-brand-tag{font-family:var(--fb);font-size:0.5rem;letter-spacing:5px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:1.2rem}
+.ft-brand p{font-size:0.84rem;color:var(--muted);line-height:1.8;max-width:260px;margin-bottom:1.5rem}
+.ft-socs{display:flex;gap:0.7rem}
+.ft-soc{width:38px;height:38px;border:1px solid var(--border);background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:0.85rem;color:var(--muted);transition:all 0.3s;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%)}
+.ft-soc:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.ft-col h5{font-family:var(--fc);font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:1.3rem}
+.ft-col ul{list-style:none}
+.ft-col li{margin-bottom:0.65rem}
+.ft-col a{font-size:0.82rem;color:var(--muted);text-decoration:none;transition:color 0.25s;font-family:var(--fb)}
+.ft-col a:hover{color:var(--gold-l)}
+.ft-bot{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;flex-wrap:wrap;gap:1rem}
+.ft-copy{font-size:0.7rem;color:rgba(255,255,255,0.18);font-family:var(--fb)}
+.ft-copy em{color:var(--gold);font-style:normal}
+.back-top{font-family:var(--fc);font-size:0.55rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:0.5rem 1.2rem;transition:all 0.3s;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%)}
+.back-top:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .nav-ul,.nav-cta{display:none}.burger{display:flex}
+  .about-grid{grid-template-columns:1fr;gap:4rem}
+  .about-photos{height:420px}
+  .ft-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .ft-brand{grid-column:1/-1}
+  .exp-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gal-cell.tall{grid-row:auto}
+  .res-grid{grid-template-columns:1fr;gap:3.5rem}
+}
+@media(max-width:700px){
+  .panel.on{grid-template-columns:1fr}
+  .exp-grid{grid-template-columns:1fr 1fr}
+  .tcard{min-width:calc(88% - 1rem)}
+  .fg-row{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .ft-grid{grid-template-columns:1fr}
+  .ft-brand{grid-column:unset}
+  .ft-bot{flex-direction:column;text-align:center}
+  .hero-btns{flex-direction:column;align-items:flex-start}
+  .stats-row{flex-wrap:wrap}
+  .stat{flex:0 0 50%;max-width:none}
+  .hero-badge{display:none}
+  .float-btn .fb-label{display:none}
+  section{padding:5rem 0!important}
+}
+@media(max-width:480px){
+  .exp-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr}
+  .res-form{padding:2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- FLOATING BUTTON -->
+<a href="#reservation" class="float-btn">
+  <div class="fb-label">Reserve Your Table</div>
+  <div class="fb-inner">🍽️</div>
+</a>
+
+<!-- MOBILE NAV -->
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <a href="#menu" onclick="closeMob()">Menu</a>
+  <a href="#about" onclick="closeMob()">Our Story</a>
+  <a href="#experience" onclick="closeMob()">Experience</a>
+  <a href="#gallery" onclick="closeMob()">Gallery</a>
+  <a href="#testimonials" onclick="closeMob()">Reviews</a>
+  <a href="#reservation" onclick="closeMob()">Reserve</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-wrap">
+    <a href="#hero" class="brand">
+      <span class="brand-name">Ember &amp; Flame</span>
+      <span class="brand-tag">Fine Dining · Est. 2018 · Islamabad</span>
+    </a>
+    <ul class="nav-ul">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">Our Story</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+    </ul>
+    <a href="#reservation" class="nav-cta">Reserve Table</a>
+    <button class="burger" onclick="document.getElementById('mobNav').classList.add('open');document.body.style.overflow='hidden'"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=85&auto=format&fit=crop" alt="Ember and Flame fine dining restaurant interior" loading="eager"/>
+  </div>
+  <div class="hero-badge">
+    <div class="badge-circle">
+      <span>4.9</span>
+      <span>Google Rating</span>
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-label">Est. 2018 &nbsp;·&nbsp; F-6 Markaz, Islamabad</div>
+    <h1 class="hero-h1">
+      <em>Where Flavor</em><br>
+      <strong>Meets Fire</strong>
+    </h1>
+    <p class="hero-sub">A Fine Dining Experience Crafted to Absolute Perfection.</p>
+    <p class="hero-urdu">"Zaiqa jo yaad reh jaye."</p>
+    <div class="hero-btns">
+      <a href="#reservation" class="btn-fire">🍽️ Reserve a Table</a>
+      <a href="#menu" class="btn-rim">View Menu</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="hero-stats rise">
+  <div class="stats-row">
+    <div class="stat"><span class="stat-num">8+</span><span class="stat-lbl">Years of Excellence</span></div>
+    <div class="stat"><span class="stat-num">40K+</span><span class="stat-lbl">Guests Served</span></div>
+    <div class="stat"><span class="stat-num">4.9 ★</span><span class="stat-lbl">Google Rating</span></div>
+    <div class="stat"><span class="stat-num">12</span><span class="stat-lbl">Culinary Awards</span></div>
+    <div class="stat"><span class="stat-num">Tue–Sun</span><span class="stat-lbl">1PM – 11:30PM</span></div>
+  </div>
+</div>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span class="si">Signature Steaks</span><span class="si">Wood Fire Kitchen</span><span class="si">Private Dining</span><span class="si">Gourmet Burgers</span><span class="si">Artisan Desserts</span><span class="si">Fine Dining</span><span class="si">Corporate Events</span><span class="si">Mocktail Bar</span>
+    <span class="si">Signature Steaks</span><span class="si">Wood Fire Kitchen</span><span class="si">Private Dining</span><span class="si">Gourmet Burgers</span><span class="si">Artisan Desserts</span><span class="si">Fine Dining</span><span class="si">Corporate Events</span><span class="si">Mocktail Bar</span>
+  </div>
+</div>
+
+<!-- ═══ MENU ═══ -->
+<section id="menu" style="padding:8rem 0">
+  <div class="wrap">
+    <div class="sec-title rise">
+      <span class="eyebrow c">Curated Menu</span>
+      <h2>The <em>Menu</em></h2>
+      <div class="rule c"></div>
+      <p>Crafted from the world's finest ingredients · Cooked over live fire</p>
+    </div>
+    <div class="tabs rise">
+      <button class="tab on" onclick="switchTab(this,'steaks')"><span class="ticon">🥩</span>Signature Steaks</button>
+      <button class="tab" onclick="switchTab(this,'burgers')"><span class="ticon">🍔</span>Gourmet Burgers</button>
+      <button class="tab" onclick="switchTab(this,'continental')"><span class="ticon">🍝</span>Continental</button>
+      <button class="tab" onclick="switchTab(this,'desserts')"><span class="ticon">🍮</span>Desserts</button>
+      <button class="tab" onclick="switchTab(this,'mocktails')"><span class="ticon">🍹</span>Mocktails</button>
+    </div>
+
+    <!-- STEAKS -->
+    <div class="panel on" id="p-steaks">
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80&auto=format&fit=crop" alt="Ember Ribeye steak"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Chef's Pick</span><span class="dbadge">Signature</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">The Ember Ribeye</div><div class="dish-desc">550g Australian Angus ribeye, dry-aged 28 days. Seared over live wood fire, finished with truffle compound butter, roasted bone marrow, charred broccolini.</div><div class="dish-foot"><span class="dish-price">PKR 7,500<small>/person</small></span><span class="dish-dot"></span></div></div>
+      </div>
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=80&auto=format&fit=crop" alt="Wagyu tenderloin steak"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Wagyu A5</span><span class="dbadge">Premium</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Wagyu Tenderloin</div><div class="dish-desc">Grade A5 Japanese Wagyu, 300g. Pan-roasted with rosemary brown butter, Merlot reduction, potato fondant, and heirloom heritage carrots.</div><div class="dish-foot"><span class="dish-price">PKR 12,500<small>/person</small></span><span class="dish-dot"></span></div></div>
+      </div>
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=600&q=80&auto=format&fit=crop" alt="T-bone steak on grill"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Bestseller</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Flame T-Bone</div><div class="dish-desc">900g classic T-bone, grilled to your doneness on our open wood fire. Chimichurri, flame-roasted corn, house-cut truffle fries.</div><div class="dish-foot"><span class="dish-price">PKR 8,900<small>/person</small></span><span class="dish-dot"></span></div></div>
+      </div>
+    </div>
+
+    <!-- BURGERS -->
+    <div class="panel" id="p-burgers">
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80&auto=format&fit=crop" alt="Black Label gourmet burger"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">No. 1 Seller</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">The Black Label</div><div class="dish-desc">Double smash Angus patty, activated charcoal brioche bun, truffle mayo, 24-month aged cheddar, crispy bacon, and house-made pickles.</div><div class="dish-foot"><span class="dish-price">PKR 2,800</span><span class="dish-dot"></span></div></div>
+      </div>
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=600&q=80&auto=format&fit=crop" alt="Mushroom royale burger"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Chef's Fav</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Ember Mushroom Royale</div><div class="dish-desc">Wagyu beef patty, wild mushroom duxelle, Gruyère, roasted garlic aioli, rocket, sun-dried tomato on a toasted sesame brioche.</div><div class="dish-foot"><span class="dish-price">PKR 3,200</span><span class="dish-dot"></span></div></div>
+      </div>
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1513185158878-8d8c2a2a3da3?w=600&q=80&auto=format&fit=crop" alt="Fried chicken gourmet burger"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Crispy Gold</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Buttermilk Gold</div><div class="dish-desc">Buttermilk fried chicken breast, hot honey glaze, jalapeño slaw, dill pickles, sriracha mayo on a pillowy potato brioche bun.</div><div class="dish-foot"><span class="dish-price">PKR 2,400</span><span class="dish-dot"></span></div></div>
+      </div>
+    </div>
+
+    <!-- CONTINENTAL -->
+    <div class="panel" id="p-continental">
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&q=80&auto=format&fit=crop" alt="Truffle carbonara pasta"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Fan Favourite</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Truffle Carbonara</div><div class="dish-desc">Silky hand-rolled spaghetti, guanciale, Pecorino Romano, free-range egg yolk, and generous black truffle shavings. Simple. Perfect. Unforgettable.</div><div class="dish-foot"><span class="dish-price">PKR 2,600</span><span class="dish-dot"></span></div></div>
+      </div>
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600&q=80&auto=format&fit=crop" alt="Pan seared sea bass fillet"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Seasonal</span><span class="dbadge">Light</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Pan-Seared Sea Bass</div><div class="dish-desc">Atlantic sea bass, saffron bisque, baby potatoes, grilled asparagus, caper beurre blanc, and crispy capers. Delicate and refined.</div><div class="dish-foot"><span class="dish-price">PKR 4,500</span><span class="dish-dot"></span></div></div>
+      </div>
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80&auto=format&fit=crop" alt="Rack of lamb provençal"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Sharing</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Rack of Lamb Provençal</div><div class="dish-desc">French-trimmed rack, herb and Dijon crust, ratatouille niçoise, pomme purée, and a rosemary-Merlot reduction.</div><div class="dish-foot"><span class="dish-price">PKR 6,200</span><span class="dish-dot"></span></div></div>
+      </div>
+    </div>
+
+    <!-- DESSERTS -->
+    <div class="panel" id="p-desserts">
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600&q=80&auto=format&fit=crop" alt="Chocolate lava fondant dessert"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Bestseller</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Dark Chocolate Fondant</div><div class="dish-desc">Valrhona 72% warm fondant, molten lava centre, salted caramel ice cream, hazelnut praline crumble, edible gold leaf.</div><div class="dish-foot"><span class="dish-price">PKR 1,400</span><span class="dish-dot"></span></div></div>
+      </div>
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80&auto=format&fit=crop" alt="Elegant dessert plate with berries"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Tableside Finish</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Crêpes Suzette Flambé</div><div class="dish-desc">Classic French crêpes in Grand Marnier caramel, flambéed tableside. Vanilla bean ice cream, candied orange zest, fresh mint.</div><div class="dish-foot"><span class="dish-price">PKR 1,800</span><span class="dish-dot"></span></div></div>
+      </div>
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?w=600&q=80&auto=format&fit=crop" alt="Raspberry mille-feuille pastry dessert"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Light</span><span class="dbadge">Elegant</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Raspberry Mille-Feuille</div><div class="dish-desc">Caramelised puff pastry layers, crème pâtissière, fresh raspberries, rose chantilly, and edible gold leaf. A work of art.</div><div class="dish-foot"><span class="dish-price">PKR 1,600</span><span class="dish-dot"></span></div></div>
+      </div>
+    </div>
+
+    <!-- MOCKTAILS -->
+    <div class="panel" id="p-mocktails">
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=600&q=80&auto=format&fit=crop" alt="Ember Sunrise signature mocktail"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">House Special</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Ember Sunrise</div><div class="dish-desc">Cold-pressed blood orange, passion fruit, fresh ginger, Himalayan pink salt rim, edible gold shimmer dust, sparkling elderflower water. Breathtaking.</div><div class="dish-foot"><span class="dish-price">PKR 750</span><span class="dish-dot"></span></div></div>
+      </div>
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=600&q=80&auto=format&fit=crop" alt="Rose velvet mocktail in elegant glass"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Romantic</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Velvet Rose</div><div class="dish-desc">Fresh rose petals, lychee, basil seeds, cucumber water, lemon, and delicate rose water foam. Served over crushed ice in a crystal coupe.</div><div class="dish-foot"><span class="dish-price">PKR 680</span><span class="dish-dot"></span></div></div>
+      </div>
+      <div class="dish rise">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&q=80&auto=format&fit=crop" alt="Mango bliss mocktail with smoke"/><div class="dish-veil"><div class="dish-badge-wrap"><span class="dbadge">Bestseller</span></div></div></div>
+        <div class="dish-body"><div class="dish-name">Midnight Mango Bliss</div><div class="dish-desc">Alphonso mango purée, activated charcoal ice, Thai basil, fresh lime, sparkling elderflower water. Served in a smoke-kissed glass.</div><div class="dish-foot"><span class="dish-price">PKR 720</span><span class="dish-dot"></span></div></div>
+      </div>
+    </div>
+
+    <div class="menu-foot rise">"Every dish is crafted fresh daily. <span>Allergen information available on request.</span> We source only the finest local &amp; imported ingredients."</div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about" style="padding:8rem 0;background:var(--ink)">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-photos rise-l">
+        <div class="photo-main">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80&auto=format&fit=crop" alt="Ember and Flame kitchen chef at work"/>
+        </div>
+        <div class="photo-sub">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80&auto=format&fit=crop" alt="Beautifully plated fine dining dish"/>
+        </div>
+        <div class="photo-award">
+          <div class="pa-num">12</div>
+          <div class="pa-lbl">Awards Won</div>
+        </div>
+      </div>
+      <div class="about-text rise-r">
+        <span class="eyebrow">Our Story</span>
+        <h2>Crafted with <em>Passion.</em><br>Served with <em>Fire.</em></h2>
+        <div class="rule"></div>
+        <p>Ember &amp; Flame was born in 2018 from a singular obsession: <strong>to create the most memorable dining experience in Pakistan.</strong> What began as a 32-seat intimate steakhouse in F-6, Islamabad, has grown into the city's most celebrated fine dining destination.</p>
+        <p>Our Executive Chef, <strong>Zafar Mirza</strong> — trained at Le Cordon Bleu Paris and with a decade at Michelin-starred restaurants in London and Dubai — leads a team of passionate culinary artists who believe that <strong>food is the highest form of art.</strong></p>
+        <div class="blockquote">
+          <p>"We don't just cook food. We craft memories. Every plate that leaves our kitchen is a story — of the farmer who grew it, the chef who dreamed it, and the guest who deserves it."</p>
+          <cite>— Chef Zafar Mirza, Executive Chef &amp; Co-Founder</cite>
+        </div>
+        <div class="tag-row">
+          <span class="tag">Open Fire Kitchen</span>
+          <span class="tag">Le Cordon Bleu Trained</span>
+          <span class="tag">12 Awards</span>
+          <span class="tag">Sustainable Sourcing</span>
+          <span class="tag">Private Dining</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience" style="padding:8rem 0">
+  <div class="wrap">
+    <div class="sec-title rise">
+      <span class="eyebrow c">The Experience</span>
+      <h2>Beyond <em>a Meal</em></h2>
+      <div class="rule c"></div>
+      <p>We curate experiences, not just dinners. Every visit is extraordinary from the moment you arrive.</p>
+    </div>
+    <div class="exp-grid rise">
+      <div class="exp-card">
+        <div class="ec-img"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80&auto=format&fit=crop" alt="Fine dining atmosphere candlelit"/></div>
+        <div class="ec-title">Fine Dining Atmosphere</div>
+        <p class="ec-desc">Candlelit tables, handcrafted interiors, and a curated jazz playlist — every detail is designed to elevate your senses.</p>
+        <div class="ec-rule"></div>
+      </div>
+      <div class="exp-card">
+        <div class="ec-img"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80&auto=format&fit=crop" alt="Private dining event table setup"/></div>
+        <div class="ec-title">Private Events</div>
+        <p class="ec-desc">Exclusive private dining room seats up to 30 guests. Proposals, anniversaries, milestones — made unforgettable.</p>
+        <div class="ec-rule"></div>
+      </div>
+      <div class="exp-card">
+        <div class="ec-img"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80&auto=format&fit=crop" alt="Family gathering dinner table"/></div>
+        <div class="ec-title">Family Gatherings</div>
+        <p class="ec-desc">A spacious family section, a menu that delights every age. Great food brings families closer together.</p>
+        <div class="ec-rule"></div>
+      </div>
+      <div class="exp-card">
+        <div class="ec-img"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&q=80&auto=format&fit=crop" alt="Corporate dinner event elegance"/></div>
+        <div class="ec-title">Corporate Dinners</div>
+        <p class="ec-desc">Impress clients, reward your team. Tailored menus, white-glove service, AV setup and absolute discretion.</p>
+        <div class="ec-rule"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GALLERY ═══ -->
+<section id="gallery">
+  <div class="gallery-grid">
+    <div class="gal-cell tall"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=700&q=80&auto=format&fit=crop" alt="Gourmet plated food art"/><div class="gal-overlay"><span class="gal-lbl">Plated Perfection</span></div></div>
+    <div class="gal-cell"><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80&auto=format&fit=crop" alt="Pancakes breakfast plating"/><div class="gal-overlay"><span class="gal-lbl">Morning Specials</span></div></div>
+    <div class="gal-cell"><img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=600&q=80&auto=format&fit=crop" alt="Avocado toast fine dining brunch"/><div class="gal-overlay"><span class="gal-lbl">Artisan Bites</span></div></div>
+    <div class="gal-cell"><img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600&q=80&auto=format&fit=crop" alt="Pasta carbonara close up"/><div class="gal-overlay"><span class="gal-lbl">Italian Heritage</span></div></div>
+    <div class="gal-cell"><img src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=600&q=80&auto=format&fit=crop" alt="Fresh oysters platter"/><div class="gal-overlay"><span class="gal-lbl">Ocean Fresh</span></div></div>
+    <div class="gal-cell"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80&auto=format&fit=crop" alt="Wood fired pizza from oven"/><div class="gal-overlay"><span class="gal-lbl">Fire-Kissed</span></div></div>
+    <div class="gal-cell"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80&auto=format&fit=crop" alt="Colourful dessert bowl fruit"/><div class="gal-overlay"><span class="gal-lbl">Sweet Endings</span></div></div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials" style="padding:8rem 0;background:var(--ink)">
+  <div class="wrap">
+    <div class="sec-title rise">
+      <span class="eyebrow c">Guest Reviews</span>
+      <h2>What Our <em>Guests Say</em></h2>
+      <div class="rule c"></div>
+      <div style="display:inline-flex;align-items:center;gap:1rem;background:var(--ink2);border:1px solid var(--border);padding:0.9rem 2rem">
+        <span style="color:var(--gold);font-size:1rem;letter-spacing:2px">★★★★★</span>
+        <span style="font-family:var(--fd);font-size:1.3rem;color:var(--cream);font-weight:600">4.9</span>
+        <span style="font-size:0.73rem;color:var(--muted);font-family:var(--fb)">1,200+ Google Reviews</span>
+      </div>
+    </div>
+    <div class="testi-slider rise">
+      <div class="testi-track" id="tTrack">
+        <div class="tcard">
+          <div class="tcard-stars">★★★★★</div>
+          <p class="tcard-txt">"The Wagyu Tenderloin was the single best piece of meat I have ever eaten in my life. The service matched the food — attentive, warm, completely unhurried. Ember &amp; Flame is a national treasure."</p>
+          <div class="tcard-foot">
+            <img class="tcard-av" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80&auto=format&fit=crop&crop=face" alt="Ahmed Siddiqui"/>
+            <div><div class="tcard-name">Ahmed Siddiqui</div><div class="tcard-role">Regular Guest · Islamabad</div></div>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-stars">★★★★★</div>
+          <p class="tcard-txt">"We held our company gala here for 25 people. Every single detail was handled perfectly. Our CEO called it the best event we've ever had. We're already booking for next year."</p>
+          <div class="tcard-foot">
+            <img class="tcard-av" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80&auto=format&fit=crop&crop=face" alt="Sara Malik"/>
+            <div><div class="tcard-name">Sara Malik</div><div class="tcard-role">Corporate Client · Islamabad</div></div>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-stars">★★★★★</div>
+          <p class="tcard-txt">"My husband proposed to me here. Chef Zafar personally came to congratulate us and sent out a stunning dessert platter. We still talk about that evening. We always will."</p>
+          <div class="tcard-foot">
+            <img class="tcard-av" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80&auto=format&fit=crop&crop=face" alt="Fatima Qureshi"/>
+            <div><div class="tcard-name">Fatima Qureshi</div><div class="tcard-role">Anniversary Guest</div></div>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-stars">★★★★★</div>
+          <p class="tcard-txt">"The Dark Chocolate Fondant is worth flying to Islamabad for. I'm completely serious. And the Ember Sunrise mocktail is liquid art. This place understands hospitality at the highest level."</p>
+          <div class="tcard-foot">
+            <img class="tcard-av" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80&auto=format&fit=crop&crop=face" alt="Omar Farooq"/>
+            <div><div class="tcard-name">Omar Farooq</div><div class="tcard-role">Food Critic · Karachi</div></div>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-stars">★★★★★</div>
+          <p class="tcard-txt">"I've dined in Michelin-starred restaurants in London and Paris. Ember &amp; Flame belongs in that category. The open fire kitchen, the perfection of each plate — it's world-class dining in Pakistan."</p>
+          <div class="tcard-foot">
+            <img class="tcard-av" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80&auto=format&fit=crop&crop=face" alt="Zara Hussain"/>
+            <div><div class="tcard-name">Zara Hussain</div><div class="tcard-role">Returning Guest · Lahore</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="slider-btns">
+        <button class="slbtn" onclick="slide(-1)">←</button>
+        <button class="slbtn" onclick="slide(1)">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESERVATION ═══ -->
+<section id="reservation" style="padding:8rem 0">
+  <div class="res-bg"><img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1800&q=60&auto=format&fit=crop" alt="Reservation restaurant background"/></div>
+  <div class="wrap">
+    <div class="res-grid">
+      <div class="res-left rise-l">
+        <span class="eyebrow">Reserve Your Table</span>
+        <h2>An Evening<br>Worth <em>Remembering</em></h2>
+        <div class="rule"></div>
+        <p>Tables at Ember &amp; Flame are in high demand. We recommend reserving at least 3 days ahead for weekends and 7 days for private events. Walk-ins welcome subject to availability.</p>
+        <div class="clinks">
+          <a href="tel:+924235678900" class="clink"><div class="clink-icon">📞</div><div><div class="clink-l">Call Reservations</div><div class="clink-v">+92 42 3567 8900</div></div></a>
+          <a href="https://wa.me/923001234567" target="_blank" class="clink"><div class="clink-icon">💬</div><div><div class="clink-l">WhatsApp</div><div class="clink-v">Instant Confirmation</div></div></a>
+          <div class="clink"><div class="clink-icon">📍</div><div><div class="clink-l">Location</div><div class="clink-v">Plot 14, F-6 Markaz, Islamabad</div></div></div>
+          <div class="clink"><div class="clink-icon">🕐</div><div><div class="clink-l">Opening Hours</div><div class="clink-v">Tuesday–Sunday · 1PM – 11:30PM</div></div></div>
+        </div>
+        <div class="mapbox">
+          <span>📍</span>
+          <strong>Ember &amp; Flame</strong>
+          <p>Plot 14, F-6 Markaz, Islamabad<br>Adjacent to Kohsar Market · Blue Area</p>
+          <a href="https://maps.google.com/?q=F6+Markaz+Islamabad" target="_blank" class="map-btn">Open in Google Maps ↗</a>
+        </div>
+      </div>
+      <div class="rise-r">
+        <div class="res-form">
+          <div class="rf-title">Make a Reservation</div>
+          <div class="rf-sub">We'll confirm within 2 hours via WhatsApp or call. ✦</div>
+          <form id="resForm">
+            <div class="fg-row">
+              <div class="fg"><label>Full Name</label><input type="text" placeholder="Your name" required/></div>
+              <div class="fg"><label>Phone</label><input type="tel" placeholder="+92 300 0000000" required/></div>
+            </div>
+            <div class="fg-row">
+              <div class="fg"><label>No. of Guests</label>
+                <select required>
+                  <option value="" disabled selected>Select…</option>
+                  <option>1 Guest</option><option>2 Guests</option><option>3 Guests</option><option>4 Guests</option><option>5–6 Guests</option><option>7–10 Guests</option><option>10+ (Private Event)</option>
+                </select>
+              </div>
+              <div class="fg"><label>Occasion</label>
+                <select>
+                  <option value="" disabled selected>Select…</option>
+                  <option>Anniversary</option><option>Birthday</option><option>Proposal</option><option>Business Dinner</option><option>Family Dinner</option><option>Casual Dining</option>
+                </select>
+              </div>
+            </div>
+            <div class="fg-row">
+              <div class="fg"><label>Preferred Date</label><input type="date" required/></div>
+              <div class="fg"><label>Preferred Time</label>
+                <select required>
+                  <option value="" disabled selected>Select…</option>
+                  <option>1:00 PM</option><option>2:00 PM</option><option>6:00 PM</option><option>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option><option>10:00 PM</option>
+                </select>
+              </div>
+            </div>
+            <div class="fg"><label>Special Requests</label><textarea placeholder="Dietary requirements, seating preference, special setup, allergies…"></textarea></div>
+            <button type="submit" class="submit-btn">✦ Confirm Reservation</button>
+            <div class="form-ok" id="formOk">✓ Reservation received! We'll confirm within 2 hours. See you soon. 🍽️</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <span class="ft-brand-name">Ember &amp; Flame</span>
+      <span class="ft-brand-tag">Fine Dining Restaurant · Islamabad, Pakistan</span>
+      <p>Where flavor meets fire. Islamabad's most celebrated fine dining restaurant, crafting unforgettable culinary experiences since 2018.</p>
+      <div class="ft-socs">
+        <a href="https://instagram.com" target="_blank" class="ft-soc">📷</a>
+        <a href="https://facebook.com" target="_blank" class="ft-soc">f</a>
+        <a href="https://wa.me/923001234567" target="_blank" class="ft-soc">💬</a>
+        <a href="https://tiktok.com" target="_blank" class="ft-soc">▶</a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h5>The Menu</h5>
+      <ul>
+        <li><a href="#menu">Signature Steaks</a></li>
+        <li><a href="#menu">Gourmet Burgers</a></li>
+        <li><a href="#menu">Continental Dishes</a></li>
+        <li><a href="#menu">Artisan Desserts</a></li>
+        <li><a href="#menu">Signature Mocktails</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h5>Experiences</h5>
+      <ul>
+        <li><a href="#experience">Fine Dining</a></li>
+        <li><a href="#experience">Private Events</a></li>
+        <li><a href="#experience">Family Gatherings</a></li>
+        <li><a href="#experience">Corporate Dinners</a></li>
+        <li><a href="#gallery">Food Gallery</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h5>Visit Us</h5>
+      <ul>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#reservation">Make a Reservation</a></li>
+        <li><a href="tel:+924235678900">+92 42 3567 8900</a></li>
+        <li><a href="#" style="pointer-events:none;color:var(--muted)">Tue–Sun · 1PM–11:30PM</a></li>
+        <li><a href="#" style="pointer-events:none;color:var(--muted)">F-6 Markaz, Islamabad</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <p class="ft-copy">© 2025 <em>Ember &amp; Flame</em> Fine Dining · All Rights Reserved · Islamabad, Pakistan</p>
+    <a href="#hero" class="back-top">↑ Back to Top</a>
+  </div>
+</footer>
+
+<script>
+// NAV
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>80)});
+function closeMob(){document.getElementById('mobNav').classList.remove('open');document.body.style.overflow=''}
+
+// REVEAL (safe with fallback)
+(function(){
+  var els=document.querySelectorAll('.rise,.rise-l,.rise-r');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e,i){
+      if(e.isIntersecting){setTimeout(function(){e.target.classList.add('in')},i*55);io.unobserve(e.target)}
+    })
+  },{threshold:0.05,rootMargin:'0px 0px -10px 0px'});
+  els.forEach(function(e){io.observe(e)});
+  setTimeout(function(){els.forEach(function(e){e.classList.add('in')})},1300);
+})();
+
+// MENU TABS
+function switchTab(btn,id){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on')});
+  btn.classList.add('on');
+  document.getElementById('p-'+id).classList.add('on');
+}
+
+// TESTIMONIAL SLIDER
+var track=document.getElementById('tTrack'),idx=0;
+function getVis(){return innerWidth<=600?1:innerWidth<=900?2:3}
+function slide(d){
+  var cards=track.querySelectorAll('.tcard'),vis=getVis(),max=cards.length-vis;
+  idx=Math.max(0,Math.min(idx+d,max));
+  track.style.transform='translateX(-'+(idx*(cards[0].offsetWidth+24))+'px)';
+}
+var auto=setInterval(function(){
+  var c=track.querySelectorAll('.tcard');
+  idx++;if(idx>c.length-getVis())idx=0;
+  track.style.transform='translateX(-'+(idx*(c[0].offsetWidth+24))+'px)';
+},5500);
+track.addEventListener('mouseenter',function(){clearInterval(auto)});
+
+// FORM
+document.getElementById('resForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var btn=this.querySelector('.submit-btn');btn.textContent='Sending…';btn.disabled=true;
+  setTimeout(function(){btn.style.display='none';document.getElementById('formOk').style.display='block'},1200);
+});
+</script>
+</body>
+</html>
